@@ -25,7 +25,8 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # 2. Desactivar MPMs conflictivos, asegurar mpm_prefork (requerido por PHP) y habilitar mod_rewrite
-RUN a2dismod mpm_event mpm_worker || true \
+RUN a2dismod mpm_event || true \
+    && a2dismod mpm_worker || true \
     && a2enmod mpm_prefork \
     && a2enmod rewrite
 

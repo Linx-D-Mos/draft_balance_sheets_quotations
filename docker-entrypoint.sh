@@ -1,6 +1,12 @@
 #!/bin/sh
 set -e
 
+# 0. Asegurar que solo el MPM 'prefork' esté habilitado (evita el error "More than one MPM loaded")
+echo "Asegurando configuración de Apache MPM (prefork)..."
+a2dismod mpm_event || true
+a2dismod mpm_worker || true
+a2enmod mpm_prefork || true
+
 # 1. Configurar el puerto de Apache dinámicamente según la variable $PORT de Railway
 PORT="${PORT:-80}"
 echo "Configurando Apache para escuchar en el puerto $PORT..."
