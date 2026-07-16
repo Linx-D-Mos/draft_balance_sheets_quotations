@@ -56,11 +56,13 @@ class DatabaseSeeder extends Seeder
         }
 
         // 4. Create Fixed Expenses
-        FixedExpense::create([
-            'concept' => 'Renta de Oficina y Seguros',
-            'amount' => 2400.00,
-            'is_active' => true,
-        ]);
+        FixedExpense::updateOrCreate(
+            ['concept' => 'Renta de Oficina y Seguros'],
+            [
+                'amount' => 2400.00,
+                'is_active' => true,
+            ]
+        );
 
         // 5. Create Global Settings (Forcing exact requirements from Paso 5)
         GlobalSetting::updateOrCreate(
