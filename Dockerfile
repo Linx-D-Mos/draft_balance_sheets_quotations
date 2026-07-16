@@ -13,8 +13,10 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install intl zip pdo_pgsql pgsql bcmath \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# 2. Habilitar mod_rewrite de Apache para Laravel
-RUN a2enmod rewrite
+# 2. Desactivar MPMs conflictivos, asegurar mpm_prefork (requerido por PHP) y habilitar mod_rewrite
+RUN a2dismod mpm_event mpm_worker || true \
+    && a2enmod mpm_prefork \
+    && a2enmod rewrite
 
 # 3. Configurar el DocumentRoot de Apache apuntando a /public
 ENV APACHE_DOCUMENT_ROOT /var/www/html/public
@@ -29,7 +31,6 @@ WORKDIR /var/www/html
 COPY . .
 
 # 6. Instalar dependencias de Composer sin ejecutar scripts de Laravel aún
-# (Los scripts de Laravel se ejecutan una vez que la app está en marcha para evitar fallos de base de datos en el build)
 ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN composer install --no-interaction --optimize-autoloader --no-scripts
 
