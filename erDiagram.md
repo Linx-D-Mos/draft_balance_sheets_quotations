@@ -18,6 +18,7 @@
     users ||--o{ project_material_purchases : "annuls"
     projects ||--o{ project_deposits : "receives"
     users ||--o{ project_deposits : "annuls"
+    quote_labor_assignments ||--o{ project_labor_logs : "optionally_tracks_actual_hours_for"
 erDiagram
 
     clients {
@@ -154,6 +155,7 @@ erDiagram
     project_labor_logs {
         bigint id PK
         bigint project_id FK "projects"
+        bigint quote_labor_assignment_id FK "quote_labor_assignments (nullable)"
         bigint employee_id FK "employees"
         bigint labor_role_id FK "labor_roles"
         bigint annulled_by_user_id FK "users (nullable)"
@@ -168,7 +170,9 @@ erDiagram
         string annulment_reason "nullable"
         timestamp created_at
         timestamp updated_at
-    }
+    } 
+
+
 
     material_categories{
         bigint id PK

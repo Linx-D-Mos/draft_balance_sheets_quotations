@@ -66,7 +66,12 @@ El software soporta el ciclo de vida completo de un proyecto: desde la parametri
   $$T\_{oh} \= \\frac{\\text{Sumatoria de Gastos Fijos Mensuales Activos}}{\\text{Capacidad Estándar de Horas Mensuales de la Empresa}}$$  
 * RN-09 (Fórmula del Precio de Venta Sugerido \- $PV$):  
   $$PV \= \\frac{\\text{Costo de Equilibrio (Costo Directo \+ Overhead Absorbido)}}{1 \- \\left(\\frac{\\text{Margen Cotizado}}{100}\\right)}$$
+* RN-10 (Filtro de Relación de Jornadas): Todo registro en project_labor_logs que asocie un
+  quote_labor_assignment_id debe pertenecer única y estrictamente a la cotización que actúe como Línea Base Activa (estado "Aprobada") del proyecto en la fecha del registro.
 
+* RN-11 (Tratamiento de Mano de Obra Excedente): Si una jornada real se registra con quote_labor_assignment_id en
+  null, el sistema clasificará automáticamente el costo de ese subtotal real como "Mano de Obra Excedente No   Presupuestada". Se sumará al costo directo real del proyecto, pero reflejará una desviación negativa directa en el Dashboard de Conciliación. 
+  
 ## **5\. Estructura de Épicas e Historias de Usuario (Refactorizadas)**
 
 ![Un diagrama jerárquico profesional del 'Mapa de Épicas del MVP'. En la parte superior central, un nodo principal titulado 'MAPA DE ÉPICAS DEL MVP'. De este nodo se desprenden cuatro ramas verticales hacia abajo que conectan con cuatro cuadros o columnas iguales y alineados horizontalmente. Cada cuadro representa una épica: 1. 'Épica 1: Parametrización de Costos (HU-01 a HU-05)', 2. 'Épica 2: Formulación de Cotizaciones (HU-06 a HU-08D)', 3. 'Épica 3: Persistencia e Inmutabilidad (HU-09 a HU-12)', y 4. 'Épica 4: Control Real y Conciliación (HU-13 a HU-16)'. El diseño debe ser limpio, con fuentes legibles y una estructura de mapa mental o de procesos clara.][image1]
