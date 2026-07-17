@@ -33,4 +33,9 @@ class LaborRole extends Model
     {
         return $this->hasMany(QuoteLaborAssignment::class);
     }
+
+    public function laborLogs(): HasMany
+    {
+        return $this->hasMany(ProjectLaborLog::class);
+    }
 }

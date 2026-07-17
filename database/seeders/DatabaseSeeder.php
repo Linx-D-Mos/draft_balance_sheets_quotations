@@ -106,6 +106,15 @@ class DatabaseSeeder extends Seeder
             Employee::updateOrCreate(['name' => $employeeData['name']], $employeeData);
         }
 
+        // 7.5 Create Material Categories
+        $materialCategories = [
+            ['code' => 'budgeted', 'display_name' => 'Presupuestado'],
+            ['code' => 'unbudgeted', 'display_name' => 'No Presupuestado'],
+        ];
+        foreach ($materialCategories as $cat) {
+            \App\Models\MaterialCategory::updateOrCreate(['code' => $cat['code']], $cat);
+        }
+
         // 8. Create Client
         $client = Client::updateOrCreate(
             ['email' => 'client@example.com'],

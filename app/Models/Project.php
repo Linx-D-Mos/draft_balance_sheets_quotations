@@ -26,4 +26,19 @@ class Project extends Model
     {
         return $this->hasMany(Quote::class);
     }
+
+    public function laborLogs(): HasMany
+    {
+        return $this->hasMany(ProjectLaborLog::class);
+    }
+
+    public function materialPurchases(): HasMany
+    {
+        return $this->hasMany(ProjectMaterialPurchase::class);
+    }
+
+    public function deposits(): HasMany
+    {
+        return $this->hasMany(ProjectDeposit::class);
+    }
 }

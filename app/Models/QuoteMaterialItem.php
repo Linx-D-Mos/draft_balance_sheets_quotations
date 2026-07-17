@@ -6,6 +6,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class QuoteMaterialItem extends Model
 {
@@ -37,5 +38,10 @@ class QuoteMaterialItem extends Model
     public function quote(): BelongsTo
     {
         return $this->belongsTo(Quote::class);
+    }
+
+    public function purchases(): HasMany
+    {
+        return $this->hasMany(ProjectMaterialPurchase::class, 'quote_material_item_id');
     }
 }

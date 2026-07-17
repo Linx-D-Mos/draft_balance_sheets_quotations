@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProjectResource\Pages;
+use App\Filament\Resources\ProjectResource\RelationManagers;
+use App\Filament\Resources\ProjectResource\Widgets\ProjectOverviewStats;
 use App\Models\Project;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -79,7 +81,9 @@ class ProjectResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\LaborLogsRelationManager::class,
+            RelationManagers\MaterialPurchasesRelationManager::class,
+            RelationManagers\DepositsRelationManager::class,
         ];
     }
 
@@ -89,6 +93,13 @@ class ProjectResource extends Resource
             'index' => Pages\ListProjects::route('/'),
             'create' => Pages\CreateProject::route('/create'),
             'edit' => Pages\EditProject::route('/{record}/edit'),
+        ];
+    }
+
+    public static function getWidgets(): array
+    {
+        return [
+            ProjectOverviewStats::class,
         ];
     }
 }
